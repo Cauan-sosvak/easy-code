@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Theme" path="res://ui/menu_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://ui/level_details/level_details.gd" id="script"]
+[ext_resource type="Texture2D" path="res://ui/art/factory.svg" id="art"]
+
+[node name="LevelDetails" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+texture_filter = 1
+script = ExtResource("script")
+
+[node name="Scrim" type="ColorRect" parent="."]
+layout_mode = 1
+color = Color(0.07, 0.16, 0.28, 0.65)
+mouse_filter = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+mouse_filter = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center"]
+layout_mode = 2
+custom_minimum_size = Vector2(520, 0)
+
+[node name="Content" type="VBoxContainer" parent="Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MapName" type="Label" parent="Center/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "FÁBRICA"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.0, 0.44314, 0.72941, 1)
+horizontal_alignment = 1
+
+[node name="Illustration" type="TextureRect" parent="Center/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("art")
+expand_mode = 1
+stretch_mode = 5
+custom_minimum_size = Vector2(0, 180)
+mouse_filter = 2
+
+[node name="LevelTitle" type="Label" parent="Center/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Nível 01"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.09804, 0.23529, 0.3451, 1)
+horizontal_alignment = 1
+
+[node name="Status" type="Label" parent="Center/Panel/Content"]
+layout_mode = 2
+text = "Em breve"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.0, 0.44314, 0.72941, 1)
+horizontal_alignment = 1
+
+[node name="Gap" type="Control" parent="Center/Panel/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 8)
+mouse_filter = 2
+
+[node name="Close" type="Button" parent="Center/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fechar"
+custom_minimum_size = Vector2(0, 56)
+mouse_default_cursor_shape = 2
+theme_type_variation = "PrimaryButton"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+
+[connection signal="pressed" from="Center/Panel/Content/Close" to="." method="_on_close_pressed"]

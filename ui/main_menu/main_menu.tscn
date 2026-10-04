@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://cyqletqk2con2"]
+
+[ext_resource type="Script" uid="uid://cx87n0f61024y" path="res://ui/main_menu/main_menu.gd" id="script"]
+[ext_resource type="Theme" path="res://ui/menu_theme.tres" id="theme"]
+
+[node name="MainMenu" type="Control" unique_id=1689598578]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1182965524]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="Center" unique_id=905433008]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="HBoxContainer" parent="Center/Content" unique_id=289015948]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Easy" type="Label" parent="Center/Content/Title" unique_id=1554381110]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.44314, 0.72941, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 68
+text = "Easy"
+
+[node name="Code" type="Label" parent="Center/Content/Title" unique_id=580504401]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.30588, 0.17255, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 68
+text = "Code"
+
+[node name="Gap" type="Control" parent="Center/Content" unique_id=675728942]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Actions" type="VBoxContainer" parent="Center/Content" unique_id=1578354778]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 18
+
+[node name="Play" type="Button" parent="Center/Content/Actions" unique_id=1770918533]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 72)
+layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_bottom = NodePath("../Quit")
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Quit")
+mouse_default_cursor_shape = 2
+theme_type_variation = &"PrimaryButton"
+theme_override_constants/h_separation = 12
+theme_override_constants/icon_max_width = 16
+theme_override_font_sizes/font_size = 26
+text = "Jogar"
+expand_icon = true
+
+[node name="Quit" type="Button" parent="Center/Content/Actions" unique_id=93804150]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 72)
+layout_mode = 2
+focus_neighbor_top = NodePath("../Play")
+focus_neighbor_bottom = NodePath("../Play")
+focus_next = NodePath("../Play")
+focus_previous = NodePath("../Play")
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 26
+text = "Sair"
+
+[connection signal="pressed" from="Center/Content/Actions/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Center/Content/Actions/Quit" to="." method="_on_quit_pressed"]

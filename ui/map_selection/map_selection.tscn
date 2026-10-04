@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Theme" path="res://ui/menu_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://ui/map_selection/map_selection.gd" id="script"]
+
+[node name="MapSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+texture_filter = 1
+script = ExtResource("script")
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="Padding" type="MarginContainer" parent="Scroll"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
+size_flags_horizontal = 3
+
+[node name="Content" type="VBoxContainer" parent="Scroll/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 10
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="Scroll/Padding/Content"]
+layout_mode = 2
+text = "Mapas"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.09804, 0.23529, 0.3451, 1)
+
+[node name="Cards" type="GridContainer" parent="Scroll/Padding/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 3
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 22
+theme_override_constants/v_separation = 22
+
+[connection signal="resized" from="." to="." method="_update_columns"]

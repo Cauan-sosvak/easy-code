@@ -1,0 +1,121 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Theme" path="res://ui/menu_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://app/app.gd" id="script"]
+[ext_resource type="Script" path="res://content/map_definition.gd" id="map_type"]
+[ext_resource type="Resource" path="res://content/maps/factory.tres" id="factory"]
+[ext_resource type="Resource" path="res://content/maps/dungeon.tres" id="dungeon"]
+[ext_resource type="Resource" path="res://content/maps/forest.tres" id="forest"]
+[ext_resource type="PackedScene" path="res://ui/main_menu/main_menu.tscn" id="menu"]
+[ext_resource type="PackedScene" path="res://ui/map_selection/map_selection.tscn" id="maps"]
+[ext_resource type="PackedScene" path="res://ui/level_selection/level_selection.tscn" id="levels"]
+[ext_resource type="PackedScene" path="res://ui/level_details/level_details.tscn" id="details"]
+
+[node name="App" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+texture_filter = 1
+script = ExtResource("script")
+maps = Array[ExtResource("map_type")]([ExtResource("factory"), ExtResource("dungeon"), ExtResource("forest")])
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+color = Color(0.89412, 0.95686, 1.0, 1)
+mouse_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margins" type="MarginContainer" parent="."]
+layout_mode = 1
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_bottom = 28
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Frame" type="VBoxContainer" parent="Margins"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Header" type="HBoxContainer" parent="Margins/Frame"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Spacer" type="Control" parent="Margins/Frame/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Back" type="Button" parent="Margins/Frame/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "←  Voltar"
+custom_minimum_size = Vector2(0, 56)
+mouse_default_cursor_shape = 2
+visible = false
+
+[node name="Screens" type="Control" parent="Margins/Frame"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MainMenu" parent="Margins/Frame/Screens" instance=ExtResource("menu")]
+unique_name_in_owner = true
+visible = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MapSelection" parent="Margins/Frame/Screens" instance=ExtResource("maps")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelSelection" parent="Margins/Frame/Screens" instance=ExtResource("levels")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelDetails" parent="." instance=ExtResource("details")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Margins/Frame/Header/Back" to="." method="_on_back_pressed"]
+[connection signal="play_requested" from="Margins/Frame/Screens/MainMenu" to="." method="_on_play_requested"]
+[connection signal="quit_requested" from="Margins/Frame/Screens/MainMenu" to="." method="_on_quit_requested"]
+[connection signal="map_selected" from="Margins/Frame/Screens/MapSelection" to="." method="_on_map_selected"]
+[connection signal="level_selected" from="Margins/Frame/Screens/LevelSelection" to="." method="_on_level_selected"]
+[connection signal="close_requested" from="LevelDetails" to="." method="_on_details_closed"]

@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Theme" path="res://ui/menu_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://ui/level_selection/level_selection.gd" id="script"]
+[ext_resource type="Texture2D" path="res://ui/art/factory.svg" id="art"]
+
+[node name="LevelSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+texture_filter = 1
+script = ExtResource("script")
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="Padding" type="MarginContainer" parent="Scroll"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
+size_flags_horizontal = 3
+
+[node name="Content" type="VBoxContainer" parent="Scroll/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 10
+size_flags_horizontal = 3
+
+[node name="MapHeader" type="HBoxContainer" parent="Scroll/Padding/Content"]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="Copy" type="VBoxContainer" parent="Scroll/Padding/Content/MapHeader"]
+layout_mode = 2
+theme_override_constants/separation = 8
+size_flags_horizontal = 3
+
+[node name="MapTitle" type="Label" parent="Scroll/Padding/Content/MapHeader/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fábrica"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(0.09804, 0.23529, 0.3451, 1)
+
+[node name="MapIllustration" type="TextureRect" parent="Scroll/Padding/Content/MapHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("art")
+expand_mode = 1
+stretch_mode = 5
+custom_minimum_size = Vector2(0, 136)
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="Levels" type="GridContainer" parent="Scroll/Padding/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 3
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 18
+
+[connection signal="resized" from="." to="." method="_update_columns"]
