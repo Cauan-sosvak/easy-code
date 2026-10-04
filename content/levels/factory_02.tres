@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LevelDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://content/level_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"factory_02"
+number = 2
+scene_path = "res://gameplay/levels/factory/factory_02_coolant.tscn"

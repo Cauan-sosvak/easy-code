@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MapDefinition" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://content/map_definition.gd" id="map"]
+[ext_resource type="Script" path="res://content/level_definition.gd" id="level"]
+[ext_resource type="Texture2D" path="res://ui/art/factory.svg" id="art"]
+[ext_resource type="Resource" path="res://content/levels/factory_01.tres" id="l1"]
+[ext_resource type="Resource" path="res://content/levels/factory_02.tres" id="l2"]
+[ext_resource type="Resource" path="res://content/levels/factory_03.tres" id="l3"]
+[ext_resource type="Resource" path="res://content/levels/factory_04.tres" id="l4"]
+[ext_resource type="Resource" path="res://content/levels/factory_05.tres" id="l5"]
+[ext_resource type="Resource" path="res://content/levels/factory_06.tres" id="l6"]
+
+[resource]
+script = ExtResource("map")
+id = &"factory"
+display_name = "Fábrica"
+description = "Engrenagens, máquinas e novas ideias."
+illustration = ExtResource("art")
+accent = Color(0.63922, 0.33725, 0.13725, 1)
+levels = Array[ExtResource("level")]([ExtResource("l1"), ExtResource("l2"), ExtResource("l3"), ExtResource("l4"), ExtResource("l5"), ExtResource("l6")])
