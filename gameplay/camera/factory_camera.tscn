@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://gameplay/camera/factory_camera.gd" id="rig"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="phantom"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="host"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="lens"]
+
+[sub_resource type="Resource" id="OrthographicLens"]
+resource_local_to_scene = true
+script = ExtResource("lens")
+projection = 1
+size = 9.0
+near = 0.1
+far = 90.0
+
+[node name="CameraRig" type="Node3D"]
+process_priority = 500
+physics_interpolation_mode = 2
+script = ExtResource("rig")
+
+[node name="BoundedTarget" type="Marker3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(12.978, 26.213, 12.978)
+rotation = Vector3(-0.959931, 0.785398, 0)
+current = true
+projection = 1
+size = 9.0
+far = 90.0
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("host")
+interpolation_mode = 1
+
+[node name="PhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
+position = Vector3(12.978, 26.213, 12.978)
+rotation = Vector3(-0.959931, 0.785398, 0)
+script = ExtResource("phantom")
+priority = 10
+follow_mode = 2
+follow_target = NodePath("../BoundedTarget")
+follow_offset = Vector3(12.978, 26.213, 12.978)
+follow_damping = true
+follow_damping_value = Vector3(0.35, 0.35, 0.35)
+tween_on_load = false
+camera_3d_resource = SubResource("OrthographicLens")
