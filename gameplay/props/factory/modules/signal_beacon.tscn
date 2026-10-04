@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3]
+
+
+
+[sub_resource type="StandardMaterial3D" id="r1"]
+resource_name = "Housing"
+albedo_color = Color(0.2, 0.26667, 0.36863, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="r2"]
+resource_name = "Amber"
+albedo_color = Color(1.0, 0.72941, 0.25882, 1)
+roughness = 0.85
+emission_enabled = true
+emission = Color(1.0, 0.72941, 0.25882, 1)
+emission_energy_multiplier = 1.1
+
+[sub_resource type="BoxMesh" id="r3"]
+size = Vector3(0.240000, 0.120000, 0.240000)
+material = SubResource("r1")
+
+[sub_resource type="BoxMesh" id="r4"]
+size = Vector3(0.150000, 0.220000, 0.150000)
+material = SubResource("r2")
+
+[sub_resource type="Animation" id="r5"]
+resource_name = "pulse"
+length = 2.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light:light_energy")
+tracks/0/interp = 1
+tracks/0/keys = {"times": PackedFloat32Array(0.0, 1.3, 2.6), "transitions": PackedFloat32Array(1, 1, 1), "update": 0, "values": [0.3, 0.8, 0.3]}
+
+[sub_resource type="AnimationLibrary" id="r6"]
+_data = {"pulse": SubResource("r5")}
+
+[node name="SignalBeacon" type="Node3D"]
+
+
+[node name="Base" type="MeshInstance3D" parent="."]
+position = Vector3(0.000000, 0.060000, 0.000000)
+mesh = SubResource("r3")
+
+[node name="Lamp" type="MeshInstance3D" parent="."]
+position = Vector3(0.000000, 0.210000, 0.000000)
+mesh = SubResource("r4")
+
+[node name="Light" type="OmniLight3D" parent="."]
+position = Vector3(0.000000, 0.400000, 0.000000)
+light_color = Color(1.0, 0.78431, 0.34118, 1)
+light_energy = 0.65
+omni_range = 2.0
+shadow_enabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "pulse"
+libraries/ = SubResource("r6")
